@@ -5,7 +5,9 @@ const Gallery = ({urls, loading, searchTerm}) => {
 
     const populate = ()=>{
       let lis =  urls.map((url,i) => <GalleryItem key={i} url={url}/>)
+      // if there are no images
       if(lis.length === 0){
+        //display loading if loading
         if(loading){
           return(
             <li className="not-found">
@@ -13,6 +15,7 @@ const Gallery = ({urls, loading, searchTerm}) => {
             </li>
           );
         }else{
+          //display no results if not loading
           return(
             <li className="not-found">
               <h3>No Results Found</h3>
@@ -29,8 +32,6 @@ const Gallery = ({urls, loading, searchTerm}) => {
         <h2>Results for {searchTerm}</h2>
         <ul>
           {populate()}
-          
-          
         </ul>
       </div>
     );

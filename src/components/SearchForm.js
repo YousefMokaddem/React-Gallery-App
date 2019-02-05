@@ -8,7 +8,7 @@ class SearchForm extends Component{
     e.preventDefault();
     this.props.search(this.input.value);
     e.currentTarget.reset();
-
+    //set submit to true for redirect in render func
     this.setState({submit: true});
   }
   render(){

@@ -10,6 +10,7 @@ import {
   Switch
 } from 'react-router-dom';
 class App extends Component {
+  //set state
   state = {
     search:{
       urls: [],
@@ -29,17 +30,21 @@ class App extends Component {
       loading: true
     }
   }
+  //search
   handleSearch(q){
+    //clear previous search
     this.setState({
       search: {
         urls: [],
         loading: true
       }
     });
+    //search 
     fetch(`https://api.flickr.com/services/rest/?per_page=24&method=flickr.photos.search&api_key=${apiKey}&tags=${q}&format=json&nojsoncallback=1`)
       .then(res=>res.json())
       .then(res=>res.photos.photo.map(photo => `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`))
       .then(res=>this.setState({
+        //set state with new search
         search:{
           urls: res,
           loading: false,
@@ -47,8 +52,8 @@ class App extends Component {
         }
       }))
       .catch(err => console.log('error fetching and parsing data', err));
-      
   }
+  //fetch data for the 3 buttons
   componentDidMount(){
     fetch(`https://api.flickr.com/services/rest/?per_page=24&method=flickr.photos.search&api_key=${apiKey}&tags=cats&format=json&nojsoncallback=1`)
       .then(res=>res.json())
@@ -58,7 +63,8 @@ class App extends Component {
           urls: res,
           loading: false
         }
-      }));
+      }))
+      .catch(err => console.log('error fetching and parsing data', err));
     fetch(`https://api.flickr.com/services/rest/?per_page=24&method=flickr.photos.search&api_key=${apiKey}&tags=dogs&format=json&nojsoncallback=1`)
       .then(res=>res.json())
       .then(res=>res.photos.photo.map(photo => `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`))
@@ -67,7 +73,8 @@ class App extends Component {
           urls: res,
           loading: false
         }
-      }));
+      }))
+      .catch(err => console.log('error fetching and parsing data', err));
     fetch(`https://api.flickr.com/services/rest/?per_page=24&method=flickr.photos.search&api_key=${apiKey}&tags=computers&format=json&nojsoncallback=1`)
       .then(res=>res.json())
       .then(res=>res.photos.photo.map(photo => `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}.jpg`))
@@ -76,7 +83,8 @@ class App extends Component {
           urls: res,
           loading: false
         }
-      }));
+      }))
+      .catch(err => console.log('error fetching and parsing data', err));
   }
   render() {
     return (
