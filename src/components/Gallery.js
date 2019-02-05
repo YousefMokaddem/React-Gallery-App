@@ -1,11 +1,10 @@
 import React from 'react';
+import GalleryItem from './GalleryItem';
 
-const PhotoContainer = ({urls, loading}) => {
+const Gallery = ({urls, loading, searchTerm}) => {
 
     const populate = ()=>{
-      let lis =  urls.map((url,i) => <li key={i}>
-        <img src={url} alt="" />
-      </li>)
+      let lis =  urls.map((url,i) => <GalleryItem key={i} url={url}/>)
       if(lis.length === 0){
         if(loading){
           return(
@@ -27,7 +26,7 @@ const PhotoContainer = ({urls, loading}) => {
     }
     return(
         <div className="photo-container">
-        <h2>Results</h2>
+        <h2>Results for {searchTerm}</h2>
         <ul>
           {populate()}
           
@@ -37,4 +36,4 @@ const PhotoContainer = ({urls, loading}) => {
     );
 }
 
-export default PhotoContainer;
+export default Gallery;
